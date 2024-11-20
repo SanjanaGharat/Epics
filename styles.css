@@ -90,4 +90,83 @@
       grid-template-columns: 1fr; /* One card per row */
     }
   }
+
   
+
+
+  /* Container for Services Section */
+#services {
+    background-color: #f7fafc;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* Service Card Styling */
+.service-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+}
+
+.service-content {
+    padding: 2rem;
+}
+
+.service-card h3 {
+    font-size: 1.875rem;
+    font-weight: 600;
+}
+
+.service-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.service-card a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+}
+
+.service-card a:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Color Patterns and Transitions */
+.bg-gradient-to-r {
+    background: linear-gradient(to right, var(--from), var(--to));
+}
+
+/* Responsive Grid */
+@media (min-width: 640px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+
+

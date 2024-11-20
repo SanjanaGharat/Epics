@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIXIE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Navbar -->
+  <header class="fixed w-full bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg shadow-md z-50">
+      <div class="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <!-- Logo with link to homepage -->
+          <a href="index.html" class="flex items-center">
+              <img src="../images/fixie2.png" alt="Logo" class="h-16 w-auto">
+          </a>
+          <div class="lg:hidden">
+              <button id="menu-icon" class="text-3xl text-gray-800 focus:outline-none">
+                  <i class="bx bx-menu"></i>
+              </button>
+          </div>
+          <nav class="hidden lg:flex items-center space-x-6">
+              <a href="../index.html" class="text-lg font-medium text-gray-700 hover:text-indigo-500">Home</a>
+              <a href="#" class="text-lg font-medium text-gray-700 hover:text-indigo-500">Services</a>
+              <a href="#" class="text-lg font-medium text-gray-700 hover:text-indigo-500">About</a>
+              <a href="#" class="text-lg font-medium text-gray-700 hover:text-indigo-500">Contact</a>
+              <div class="relative group" onmouseleave="handleMouseLeave('login-dropdown')" onmouseenter="clearHideTimeout()">
+                  <button class="flex items-center space-x-2 text-lg font-medium text-gray-700 hover:text-indigo-500 focus:outline-none">
+                      <span>Login</span>
+                      <i class="bx bx-chevron-down"></i>
+                  </button>
+                  <div id="login-dropdown" class="absolute left-0 hidden bg-white rounded-lg shadow-lg mt-2 w-35">
+                      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">User</a>
+                      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Admin</a>
+                  </div>
+              </div>
+          </nav>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden" >
+        <div class="px-4 py-4 space-y-2 shadow-md bg-opacity-70">
+   
+                 <a href="../index.html" class="block text-lg font-medium text-gray-700 hover:text-indigo-500">Home</a>
+              <a href="#" class="block text-lg font-medium text-gray-700 hover:text-indigo-500">Services</a>
+              <a href="#" class="block text-lg font-medium text-gray-700 hover:text-indigo-500">About</a>
+              <a href="#" class="block text-lg font-medium text-gray-700 hover:text-indigo-500">Contact</a>
+              <div class="space-y-1">
+                  <div class="flex justify-between items-center">
+                      <a href="#" class="text-lg font-medium text-gray-700 hover:text-indigo-500">Login</a>
+                      <button onclick="toggleDropdown('mobile-login-dropdown')" class="text-gray-500 focus:outline-none">
+                          <i class="bx bx-chevron-down"></i>
+                      </button>
+                  </div>
+                  <div id="mobile-login-dropdown" class="hidden">
+                      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">User</a>
+                      <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50">Admin</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+
+ <!-- Hero Section -->
+<!-- Hero Section -->
+<div id="hero-section-container" class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-16 overflow-hidden pt-32">
+    <!-- Animated Background Shapes -->
+    <div class="absolute inset-0 pointer-events-none z-0">
+        <!-- Circles -->
+        <div class="absolute top-10 left-10 w-32 h-32 bg-white bg-opacity-10 rounded-full animate-pulse"></div>
+        <div class="absolute top-40 right-20 w-20 h-20 bg-white bg-opacity-20 rounded-full animate-bounce"></div>
+        <div class="absolute bottom-10 left-1/3 w-40 h-40 bg-white bg-opacity-10 rounded-full animate-pulse"></div>
+        <!-- Triangles -->
+        <div class="absolute top-16 right-16 w-0 h-0 border-l-16 border-l-transparent border-r-16 border-r-transparent border-b-32 border-b-white opacity-20 animate-spin"></div>
+        <div class="absolute bottom-32 left-12 w-0 h-0 border-l-20 border-l-transparent border-r-20 border-r-transparent border-b-40 border-b-white opacity-25 animate-bounce"></div>
+        <!-- Wavy Lines -->
+        <svg class="absolute bottom-10 left-28 w-64 h-16 opacity-30 animate-wavy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="none" stroke="white" stroke-width="2" d="M0,192L60,181.3C120,171,240,149,360,154.7C480,160,600,192,720,192C840,192,960,160,1080,149.3C1200,139,1320,149,1380,154.7L1440,160"></path>
+        </svg>
+        <svg class="absolute top-20 right-32 w-48 h-12 opacity-40 animate-wavy-slow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="none" stroke="white" stroke-width="2" d="M0,192L80,181.3C160,171,320,149,480,154.7C640,160,800,192,960,192C1120,192,1280,160,1360,149.3L1440,160"></path>
+        </svg>
+        <!-- Curved Lines -->
+        <svg class="absolute top-5 left-40 w-48 h-48 opacity-20 animate-move-curve" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <path fill="none" stroke="white" stroke-width="3" d="M10,100 C60,20 140,180 190,100" />
+        </svg>
+        <svg class="absolute bottom-20 right-24 w-56 h-56 opacity-30 animate-move-curve" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <path fill="none" stroke="white" stroke-width="3" d="M10,100 C60,20 140,180 190,100" />
+        </svg>
+    </div>
+
+    <div id="hero-section-content" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="hero-section-layout" class="flex flex-col items-center justify-center">
+            <!-- Text Content -->
+            <div id="hero-section-text" class="text-center mb-10">
+                <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-4">
+                    Services
+                </h1>
+                <p class="text-lg mb-6">
+                    Discover trusted local service providers for all your needs. Empower your community and find experts nearby.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="px-6 py-3 bg-white text-indigo-600 font-medium rounded-lg shadow hover:bg-gray-100 transition">Get Started</a>
+                    <a href="#survey" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg shadow hover:bg-indigo-700 transition">Take the Survey</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- HOW IT WORKS  -->
+<section id="how-it-works" class="bg-gradient-to-r from-indigo-100 to-indigo-200 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 animate__animated animate__fadeInUp">How It Works</h2>
+      <p class="text-lg mt-4 text-gray-700 animate__animated animate__fadeInUp animate__delay-1s">Easily discover, book, and review trusted local service providers.</p>
+    </div>
+    <!-- Grid for Cards with Responsive Layout -->
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-8 justify-center items-stretch">
+      <!-- Find Local Providers -->
+      <div class="text-center p-6 bg-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-xl animate__animated animate__fadeInUp animate__delay-2s mx-auto h-full max-w-xs sm:max-w-sm md:max-w-md">
+        <div class="text-indigo-600 text-5xl mb-6">
+          <i class="fas fa-search"></i>
+        </div>
+        <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Find Local Service Providers</h3>
+        <p class="text-lg text-gray-600">Browse through categories like electricians, plumbers, and more. Discover professionals near you with trusted ratings.</p>
+      </div>
+      <!-- Book Appointments -->
+      <div class="text-center p-6 bg-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-xl animate__animated animate__fadeInUp animate__delay-3s mx-auto h-full max-w-xs sm:max-w-sm md:max-w-md">
+        <div class="text-indigo-600 text-5xl mb-6">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Book Appointments</h3>
+        <p class="text-lg text-gray-600">Easily book appointments directly with service providers. Choose your preferred time and date.</p>
+      </div>
+      <!-- Leave Reviews -->
+      <div class="text-center p-6 bg-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-xl animate__animated animate__fadeInUp animate__delay-4s mx-auto h-full max-w-xs sm:max-w-sm md:max-w-md">
+        <div class="text-indigo-600 text-5xl mb-6">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Leave Reviews</h3>
+        <p class="text-lg text-gray-600">Rate and review services to help others make informed decisions. Share your experience with the community.</p>
+      </div>
+    </div>
+    <!-- Call to Action for Survey -->
+    <div class="text-center mt-16 animate__animated animate__fadeInUp animate__delay-5s">
+      <h3 class="text-2xl font-semibold text-gray-800 mb-4">Help Us Grow – Take Our Survey</h3>
+      <p class="text-lg text-gray-700 mb-6">We need your input to build the most comprehensive list of local service providers. Take our quick survey!</p>
+      <a href="#survey" class="inline-block px-8 py-3 bg-indigo-500 text-white text-lg font-medium rounded-lg shadow-md hover:bg-indigo-600 transition-transform transform hover:scale-105">Take the Survey</a>
+    </div>
+  </div>
+</section>
+
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7fc;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Header Styling */
+    #electrician-header {
+        background: #a8c0ff;
+        background: -webkit-linear-gradient(to right, #3f2b96, #a8c0ff);
+        background: linear-gradient(to right, #3f2b96, #a8c0ff);
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    #electrician-header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    /* Search and Filter Section */
+    #search-filter-section {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 1200px;
+        border-radius: 8px;
+    }
+
+    #search-bar, .filter-dropdown {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    #search-bar {
+        flex: 1;
+        min-width: 300px;
+    }
+
+    /* Service Provider Grid */
+    #service-provider-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .provider-card {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 280px; /* Fixed width */
+        height: 350px; /* Fixed height */
+        margin: auto;
+    }
+
+    .provider-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .provider-image {
+        width: 100%;
+        height: 180px; /* Fixed image height */
+        object-fit: cover;
+    }
+
+    .provider-info {
+        padding: 15px;
+    }
+
+    .provider-info h3 {
+        font-size: 1.25rem;
+        margin: 0;
+        color: #3f2b96;
+    }
+
+    .provider-info p {
+        margin: 10px 0;
+        color: #666;
+    }
+
+    .provider-info .rating {
+        color: #ffc107;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        #search-filter-section {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+    #search-filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 8px;
+}
+
+#search-bar, .filter-dropdown {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 150px; /* Ensure a minimum size for smaller screens */
+}
+
+#search-bar {
+    flex-grow: 2; /* Search bar gets more space */
+    min-width: 200px;
+}
+
+@media (max-width: 768px) {
+    #search-filter-section {
+        flex-direction: column;
+        align-items: stretch; /* Align items to fill the available width */
+        gap: 10px;
+    }
+
+    #search-bar, .filter-dropdown {
+        flex-grow: 1; /* Ensure elements expand evenly */
+        width: 100%; /* Take full width in smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #search-bar {
+        font-size: 0.9rem; /* Adjust font size for very small screens */
+    }
+
+    .filter-dropdown {
+        font-size: 0.8rem;
+    }
+}
+
+</style>
+<!-- 
+services section -->
+<header id="electrician-header">
+    <h2>Service Providers</h2>
+</header>
+<section id="search-filter-section">
+    <input type="text" id="search-bar" placeholder="Search Providers by Name or Service...">
+    <select id="filter-category" class="filter-dropdown">
+        <option value="all">All Categories</option>
+        <option value="residential">Residential</option>
+        <option value="commercial">Commercial</option>
+        <option value="industrial">Industrial</option>
+    </select>
+    <select id="filter-rating" class="filter-dropdown">
+        <option value="all">All Ratings</option>
+        <option value="4.5">4.5+ Stars</option>
+        <option value="4.0">4.0+ Stars</option>
+        <option value="3.5">3.5+ Stars</option>
+    </select>
+    <select id="filter-cost" class="filter-dropdown">
+        <option value="all">All Costs</option>
+        <option value="low">Low Cost</option>
+        <option value="medium">Medium Cost</option>
+        <option value="high">High Cost</option>
+    </select>
+    <select id="filter-service" class="filter-dropdown">
+        <option value="all">All Services</option>
+        <option value="electrician">Electrician</option>
+        <option value="plumber">Plumber</option>
+        <option value="computer-repair">Computer Repair</option>
+        <option value="cleaning-services">Cleaning Services</option>
+        <option value="gardening">Gardening</option>
+        <option value="pest-control">Pest Control</option>
+        <option value="welding">Welding</option>
+        <option value="painting">Painting</option>
+        <option value="HVAC-repair">HVAC Repair</option>
+        <option value="carpentry">Carpentry</option>
+        <option value="machinery-repair">Machinery Repair</option>
+        <option value="babysitting">Babysitting</option>
+        <option value="security-systems">Security Systems</option>
+        <option value="pet-grooming">Pet Grooming</option>
+        <option value="window-cleaning">Window Cleaning</option>
+        <option value="logistics">Logistics</option>
+        <option value="elderly-care">Elderly Care</option>
+    </select>
+    
+</section>
+
+<section id="service-provider-list">
+    <!-- Cards will be dynamically generated here -->
+</section>
+
+<script>
+   // Service provider data with 'service' field
+   const serviceProviders = [
+{ name: 'John Doe', category: 'residential', service: 'electrician', image: 'https://via.placeholder.com/300', rating: 4.5, cost: 'medium', description: 'Expert in home electrical repairs and installations.' },
+{ name: 'Jane Smith', category: 'commercial', service: 'plumber', image: 'https://via.placeholder.com/300', rating: 4.8, cost: 'high', description: 'Specialist in office and commercial space plumbing.' },
+{ name: 'Mike Johnson', category: 'industrial', service: 'computer-repair', image: 'https://via.placeholder.com/300', rating: 4.2, cost: 'low', description: 'Experienced in large-scale industrial computer repairs.' },
+{ name: 'Sarah Lee', category: 'residential', service: 'cleaning-services', image: 'https://via.placeholder.com/300', rating: 5.0, cost: 'medium', description: 'Trusted by hundreds for her quick and efficient cleaning services.' },
+{ name: 'Tom Harris', category: 'residential', service: 'electrician', image: 'https://via.placeholder.com/300', rating: 4.7, cost: 'high', description: 'Skilled in home automation and electrical system upgrades.' },
+{ name: 'Linda Green', category: 'commercial', service: 'plumber', image: 'https://via.placeholder.com/300', rating: 4.9, cost: 'high', description: 'Commercial plumbing contractor with extensive experience in office buildings.' },
+{ name: 'Alex Williams', category: 'industrial', service: 'computer-repair', image: 'https://via.placeholder.com/300', rating: 4.6, cost: 'low', description: 'Expert in industrial computer repairs for large machinery.' },
+{ name: 'Jessica Brown', category: 'residential', service: 'cleaning-services', image: 'https://via.placeholder.com/300', rating: 4.3, cost: 'medium', description: 'Professional cleaner specializing in home cleanups and repairs.' },
+{ name: 'Paul Davis', category: 'residential', service: 'gardening', image: 'https://via.placeholder.com/300', rating: 4.8, cost: 'medium', description: 'Expert in garden maintenance and landscaping.' },
+{ name: 'Emily Clark', category: 'commercial', service: 'pest-control', image: 'https://via.placeholder.com/300', rating: 4.5, cost: 'medium', description: 'Specialist in eco-friendly pest control solutions for offices.' },
+{ name: 'Mark Lewis', category: 'industrial', service: 'welding', image: 'https://via.placeholder.com/300', rating: 4.9, cost: 'high', description: 'Industrial-grade welding expert for heavy machinery.' },
+{ name: 'Anna Scott', category: 'residential', service: 'painting', image: 'https://via.placeholder.com/300', rating: 4.7, cost: 'medium', description: 'Professional painter for homes and interiors.' },
+{ name: 'Daniel Walker', category: 'commercial', service: 'HVAC-repair', image: 'https://via.placeholder.com/300', rating: 4.6, cost: 'high', description: 'Experienced HVAC technician for commercial buildings.' },
+{ name: 'Sophia Turner', category: 'residential', service: 'carpentry', image: 'https://via.placeholder.com/300', rating: 4.4, cost: 'medium', description: 'Skilled carpenter for home furniture and repairs.' },
+{ name: 'James Wright', category: 'industrial', service: 'machinery-repair', image: 'https://via.placeholder.com/300', rating: 4.3, cost: 'high', description: 'Expert in repairing industrial-grade machinery.' },
+{ name: 'Laura Adams', category: 'residential', service: 'babysitting', image: 'https://via.placeholder.com/300', rating: 4.9, cost: 'medium', description: 'Trusted babysitter with years of experience.' },
+{ name: 'Ethan Phillips', category: 'commercial', service: 'security-systems', image: 'https://via.placeholder.com/300', rating: 5.0, cost: 'high', description: 'Expert in installing and maintaining security systems for offices.' },
+{ name: 'Chloe Edwards', category: 'residential', service: 'pet-grooming', image: 'https://via.placeholder.com/300', rating: 4.8, cost: 'medium', description: 'Specialized in grooming pets with care and attention.' },
+{ name: 'Nathan Martin', category: 'commercial', service: 'window-cleaning', image: 'https://via.placeholder.com/300', rating: 4.7, cost: 'low', description: 'Efficient window cleaner for office buildings.' },
+{ name: 'Victoria Hill', category: 'industrial', service: 'logistics', image: 'https://via.placeholder.com/300', rating: 4.5, cost: 'high', description: 'Expert in industrial logistics and transportation.' },
+{ name: 'Chris Carter', category: 'residential', service: 'plumber', image: 'https://via.placeholder.com/300', rating: 4.6, cost: 'low', description: 'Reliable plumber for all home plumbing needs.' },
+{ name: 'Lucy Moore', category: 'residential', service: 'elderly-care', image: 'https://via.placeholder.com/300', rating: 5.0, cost: 'medium', description: 'Compassionate caregiver for the elderly.' },
+{ name: 'Ryan Nelson', category: 'industrial', service: 'electrician', image: 'https://via.placeholder.com/300', rating: 4.3, cost: 'medium', description: 'Experienced in electrical systems for factories.' },
+];
+
+
+// Elements
+const serviceProviderList = document.getElementById('service-provider-list');
+const searchBar = document.getElementById('search-bar');
+const filterCategory = document.getElementById('filter-category');
+const filterRating = document.getElementById('filter-rating');
+const filterCost = document.getElementById('filter-cost');
+const filterService = document.getElementById('filter-service');
+
+// Render cards
+function renderCards(filters = {}) {
+serviceProviderList.innerHTML = ''; // Clear existing cards
+
+serviceProviders
+    .filter(provider => {
+        const matchesCategory = filters.category === 'all' || provider.category === filters.category;
+        const matchesService = filters.service === 'all' || provider.service === filters.service;
+        const matchesSearch = filters.search === '' || provider.name.toLowerCase().includes(filters.search.toLowerCase()) || provider.description.toLowerCase().includes(filters.search.toLowerCase());
+        const matchesRating = filters.rating === 'all' || provider.rating >= parseFloat(filters.rating);
+        const matchesCost = filters.cost === 'all' || provider.cost === filters.cost;
+        return matchesCategory && matchesService && matchesSearch && matchesRating && matchesCost;
+    })
+    .forEach(provider => {
+        const card = document.createElement('div');
+        card.className = 'provider-card';
+        card.innerHTML = `
+            <img src="${provider.image}" alt="${provider.name}" class="provider-image">
+            <div class="provider-info">
+                <h3>${provider.name}</h3>
+                <p>${provider.description}</p>
+                <p class="rating">Rating: ${provider.rating} <i class="fas fa-star"></i></p>
+            </div>
+        `;
+        serviceProviderList.appendChild(card);
+    });
+}
+
+// Event listeners
+function applyFilters() {
+const filters = {
+    search: searchBar.value,
+    category: filterCategory.value,
+    rating: filterRating.value,
+    cost: filterCost.value,
+    service: filterService.value,
+};
+renderCards(filters);
+}
+
+searchBar.addEventListener('input', applyFilters);
+filterCategory.addEventListener('change', applyFilters);
+filterRating.addEventListener('change', applyFilters);
+filterCost.addEventListener('change', applyFilters);
+filterService.addEventListener('change', applyFilters);
+
+// Initial render
+renderCards({
+search: '',
+category: 'all',
+rating: 'all',
+cost: 'all',
+service: 'all',
+});
+
+</script>
+
+
+
+<!-- Why Choose Our Local Service Providers Section -->
+<section id="why-local-providers" class="bg-indigo-50 py-12">
+    <div class="container mx-auto px-6">
+        <!-- Section Title -->
+        <div id="section-title" class="text-center mb-8">
+            <h2 id="providers-title" class="text-4xl font-bold text-indigo-900 mb-4">Why Our Community Providers?</h2>
+            <p id="providers-text" class="text-xl text-gray-700 max-w-3xl mx-auto">
+                Supporting local businesses means investing in your community. Our providers are trusted by your neighbors and offer reliable, affordable, and high-quality services. Choose local, choose better!
+            </p>
+        </div>
+        
+        <!-- Icons Section -->
+        <div id="icons-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- Trust Icon -->
+            <div id="trust-icon" class="service-item flex flex-col items-center text-center">
+                <div id="trust-icon-img" class="text-indigo-600 text-5xl mb-4">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3 id="trust-title" class="text-xl font-semibold text-indigo-900 mb-2">Trusted by Your Neighbors</h3>
+                <p id="trust-text" class="text-gray-600">Our service providers are trusted by the local community for their reliability and integrity.</p>
+            </div>
+
+            <!-- Quality Icon -->
+            <div id="quality-icon" class="service-item flex flex-col items-center text-center">
+                <div id="quality-icon-img" class="text-indigo-600 text-5xl mb-4">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3 id="quality-title" class="text-xl font-semibold text-indigo-900 mb-2">Top Quality Services</h3>
+                <p id="quality-text" class="text-gray-600">We connect you with providers who deliver high-quality services that meet your needs.</p>
+            </div>
+
+            <!-- Affordability Icon -->
+            <div id="affordability-icon" class="service-item flex flex-col items-center text-center">
+                <div id="affordability-icon-img" class="text-indigo-600 text-5xl mb-4">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3 id="affordability-title" class="text-xl font-semibold text-indigo-900 mb-2">Affordable Prices</h3>
+                <p id="affordability-text" class="text-gray-600">Get quality services without breaking the bank. We offer competitive rates that fit your budget.</p>
+            </div>
+
+            <!-- Support Local Icon -->
+            <div id="support-local-icon" class="service-item flex flex-col items-center text-center">
+                <div id="support-local-icon-img" class="text-indigo-600 text-5xl mb-4">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 id="support-local-title" class="text-xl font-semibold text-indigo-900 mb-2">Support Your Local Economy</h3>
+                <p id="support-local-text" class="text-gray-600">By hiring local service providers, you contribute to the growth of your community and economy.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add FontAwesome for Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<style>
+    /* Container Styling */
+    .container {
+        max-width: 1200px;
+    }
+
+    /* Section Title Styling */
+    #providers-title {
+        font-size: 2rem;
+        color: #4A4A4A;
+    }
+
+    /* Icon Styling */
+    .fa {
+        font-size: 3rem;
+        transition: transform 0.3s ease;
+    }
+
+    .fa:hover {
+        transform: scale(1.2);
+    }
+
+    /* Text Styling */
+    #providers-text {
+        font-size: 1.125rem;
+        color: #555;
+    }
+
+    .service-item {
+        text-align: center;
+    }
+
+    #trust-icon-img, #quality-icon-img, #affordability-icon-img, #support-local-icon-img {
+        font-size: 3rem;
+        color: #4c6ef5;
+    }
+
+    /* Text and Title Color Styling */
+    #trust-title, #quality-title, #affordability-title, #support-local-title {
+        color: #4A4A4A;
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    #trust-text, #quality-text, #affordability-text, #support-local-text {
+        color: #555;
+        font-size: 1rem;
+    }
+
+    /* Container and Grid Layout */
+    #icons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+</style>
+
+
+
+<!-- Survey -->
+<section id="survey" class="bg-gray-100 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Heading -->
+      <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-indigo-600">Help Us Build a Better Community</h2>
+          <p class="text-lg mt-4 text-gray-600">Take a few minutes to fill out our survey and help us collect important information about local service providers.</p>
+      </div>
+      <!-- Survey Form -->
+      <div class="flex justify-center">
+          <form class="bg-white p-10 rounded-lg shadow-xl w-full sm:w-2/3 md:w-1/2">
+              <!-- Name Field -->
+              <div class="mb-6">
+                  <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+                  <input 
+                      type="text" 
+                      id="name" 
+                      name="name" 
+                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                      placeholder="Enter your name">
+              </div>
+              <!-- Service Field -->
+              <div class="mb-6">
+                  <label for="service" class="block text-sm font-medium text-gray-700">Select a Service</label>
+                  <select 
+                      id="service" 
+                      name="service" 
+                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500">
+                      <option value="" disabled selected>Select an option</option>
+                      <option value="electrician">Electrician</option>
+                      <option value="plumber">Plumber</option>
+                      <option value="computer-repair">Computer Repair</option>
+                      <option value="carpenter">Carpenter</option>
+                      <option value="painter">Painter</option>
+                  </select>
+              </div>
+              <!-- Message Field -->
+              <div class="mb-6">
+                  <label for="message" class="block text-sm font-medium text-gray-700">Additional Comments</label>
+                  <textarea 
+                      id="message" 
+                      name="message" 
+                      rows="4" 
+                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                      placeholder="Add any comments or suggestions"></textarea>
+              </div>
+              <!-- Submit Button -->
+              <button 
+                  type="submit" 
+                  class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition transform hover:scale-105">
+                  Submit Survey
+              </button>
+          </form>
+      </div>
+  </div>
+</section>
+
+
+<!-- FAQ SECTION -->
+<section id="faq" class="bg-gray-100 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-indigo-600">Frequently Asked Questions</h2>
+      <p class="text-lg mt-4 text-gray-600">Get answers to your most common questions.</p>
+    </div>
+
+    <div class="space-y-6">
+      <!-- FAQ Item 1 -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+        <button class="w-full text-left text-xl font-semibold text-indigo-600 flex justify-between items-center" id="faq1-btn">
+          What services do you provide?
+          <span id="faq1-icon" class="text-xl text-indigo-600">+</span>
+        </button>
+        <div class="mt-4 text-gray-600 hidden" id="faq1-content">
+          <p>We offer a variety of services, including electricians, plumbers, computer repair, and more. You can browse our directory to find the right professionals near you.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+        <button class="w-full text-left text-xl font-semibold text-indigo-600 flex justify-between items-center" id="faq2-btn">
+          How can I book a service provider?
+          <span id="faq2-icon" class="text-xl text-indigo-600">+</span>
+        </button>
+        <div class="mt-4 text-gray-600 hidden" id="faq2-content">
+          <p>Booking a service is simple! Select your provider, choose a time slot, and confirm your appointment. You will receive a confirmation email with the details.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+        <button class="w-full text-left text-xl font-semibold text-indigo-600 flex justify-between items-center" id="faq3-btn">
+          Can I leave a review for a service provider?
+          <span id="faq3-icon" class="text-xl text-indigo-600">+</span>
+        </button>
+        <div class="mt-4 text-gray-600 hidden" id="faq3-content">
+          <p>Yes, after your service is completed, you can leave feedback and rate the service provider to help other customers make informed decisions.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+        <button class="w-full text-left text-xl font-semibold text-indigo-600 flex justify-between items-center" id="faq4-btn">
+          How do I participate in your survey?
+          <span id="faq4-icon" class="text-xl text-indigo-600">+</span>
+        </button>
+        <div class="mt-4 text-gray-600 hidden" id="faq4-content">
+          <p>To help us improve, please fill out our quick survey after using a service. Your feedback will help us enhance our offerings and help others in the community.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- footer  -->
+<footer class="bg-indigo-600 text-white py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Top Section: Logo, About Us, Links -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12 text-gray-300 text-center sm:text-left">
+
+      <!-- Column 1: Logo and About Us -->
+      <div class="flex justify-center sm:justify-start items-center space-x-4">
+        <!-- Company Logo -->
+        <img src="../images/FIXIE4.png" alt="Community Connect Logo" class="w-48 h-auto sm:w-56 sm:h-auto md:w-64 md:h-auto rounded-full">
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div>
+        <h4 class="text-lg sm:text-xl md:text-2xl font-semibold">Quick Links</h4>
+        <ul class="space-y-2 mt-4">
+          <li><a href="../index.html" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Home</a></li>
+          <li><a href="#" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Services</a></li>
+          <li><a href="#" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">FAQ</a></li>
+          <li><a href="#" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Support</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Contact -->
+      <div>
+        <h4 class="text-lg sm:text-xl md:text-2xl font-semibold">Contact</h4>
+        <ul class="space-y-2 mt-4">
+          <li><a href="tel:+123456789" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Call Us</a></li>
+          <li><a href="mailto:info@communityconnect.com" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Email Us</a></li>
+          <li><a href="#" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Our Location</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Social Media -->
+      <div>
+        <h4 class="text-lg sm:text-xl md:text-2xl font-semibold">Follow Us</h4>
+        <div class="flex justify-center sm:justify-start space-x-4 mt-4">
+          <a href="#" class="hover:text-gray-200 text-xl sm:text-2xl md:text-3xl">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+          <a href="#" class="hover:text-gray-200 text-xl sm:text-2xl md:text-3xl">
+            <i class="fab fa-twitter-square"></i>
+          </a>
+          <a href="#" class="hover:text-gray-200 text-xl sm:text-2xl md:text-3xl">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="#" class="hover:text-gray-200 text-xl sm:text-2xl md:text-3xl">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider Line -->
+    <div class="border-t border-gray-400 my-8"></div>
+
+    <!-- Bottom Section: Copyright and Legal -->
+    <div class="text-center text-gray-300">
+      <p class="text-sm sm:text-base md:text-lg">&copy; 2024 Community Connect. All Rights Reserved. | <a href="#" class="hover:text-gray-200">Terms & Conditions</a> | <a href="#" class="hover:text-gray-200">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+     <script src="../script.js"></script>
+</body>
+</html>
