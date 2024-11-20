@@ -7,6 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 
 </head>
 <body class="bg-gray-100 font-sans">
@@ -65,7 +68,7 @@
   </header>
 
   <!-- Hero Section -->
-  <div id="hero-section-container" class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-28 mb-12 overflow-hidden">
+  <div id="hero-section-container" class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-28  overflow-hidden">
     <!-- Animated Background Shapes -->
     <div class="absolute inset-0 pointer-events-none z-0">
         <!-- Circles -->
@@ -113,6 +116,255 @@
         </div>
     </div>
 </div>
+
+<!-- HOW IT WORKS  -->
+<section id="how-it-works" class="bg-gradient-to-r from-indigo-100 to-indigo-200 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 animate__animated animate__fadeInUp">How It Works</h2>
+      <p class="text-lg mt-4 text-gray-700 animate__animated animate__fadeInUp animate__delay-1s">Easily discover, book, and review trusted local service providers.</p>
+    </div>
+    <!-- Grid for Cards with Responsive Layout -->
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-8 justify-center items-center">
+      <!-- Find Local Providers -->
+      <div class="text-center p-6 bg-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-xl animate__animated animate__fadeInUp animate__delay-2s mx-auto" style="max-width: 350px; min-height: 280px;">
+        <div class="text-indigo-600 text-5xl mb-6">
+          <i class="fas fa-search"></i>
+        </div>
+        <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Find Local Service Providers</h3>
+        <p class="text-lg text-gray-600">Browse through categories like electricians, plumbers, and more. Discover professionals near you with trusted ratings.</p>
+      </div>
+      <!-- Book Appointments -->
+      <div class="text-center p-6 bg-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-xl animate__animated animate__fadeInUp animate__delay-3s mx-auto" style="max-width: 350px; min-height: 280px;">
+        <div class="text-indigo-600 text-5xl mb-6">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Book Appointments</h3>
+        <p class="text-lg text-gray-600">Easily book appointments directly with service providers. Choose your preferred time and date.</p>
+      </div>
+      <!-- Leave Reviews -->
+      <div class="text-center p-6 bg-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-xl animate__animated animate__fadeInUp animate__delay-4s mx-auto" style="max-width: 350px; min-height: 280px;">
+        <div class="text-indigo-600 text-5xl mb-6">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Leave Reviews</h3>
+        <p class="text-lg text-gray-600">Rate and review services to help others make informed decisions. Share your experience with the community.</p>
+      </div>
+    </div>
+    <!-- Call to Action for Survey -->
+    <div class="text-center mt-16 animate__animated animate__fadeInUp animate__delay-5s">
+      <h3 class="text-2xl font-semibold text-gray-800 mb-4">Help Us Grow – Take Our Survey</h3>
+      <p class="text-lg text-gray-700 mb-6">We need your input to build the most comprehensive list of local service providers. Take our quick survey!</p>
+      <a href="#survey" class="inline-block px-8 py-3 bg-indigo-500 text-white text-lg font-medium rounded-lg shadow-md hover:bg-indigo-600 transition-transform transform hover:scale-105">Take the Survey</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Survey -->
+<section id="survey" class="bg-gray-100 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Heading -->
+      <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-indigo-600">Help Us Build a Better Community</h2>
+          <p class="text-lg mt-4 text-gray-600">Take a few minutes to fill out our survey and help us collect important information about local service providers.</p>
+      </div>
+      <!-- Survey Form -->
+      <div class="flex justify-center">
+          <form class="bg-white p-10 rounded-lg shadow-xl w-full sm:w-2/3 md:w-1/2">
+              <!-- Name Field -->
+              <div class="mb-6">
+                  <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+                  <input 
+                      type="text" 
+                      id="name" 
+                      name="name" 
+                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                      placeholder="Enter your name">
+              </div>
+              <!-- Service Field -->
+              <div class="mb-6">
+                  <label for="service" class="block text-sm font-medium text-gray-700">Select a Service</label>
+                  <select 
+                      id="service" 
+                      name="service" 
+                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500">
+                      <option value="" disabled selected>Select an option</option>
+                      <option value="electrician">Electrician</option>
+                      <option value="plumber">Plumber</option>
+                      <option value="computer-repair">Computer Repair</option>
+                      <option value="carpenter">Carpenter</option>
+                      <option value="painter">Painter</option>
+                  </select>
+              </div>
+              <!-- Message Field -->
+              <div class="mb-6">
+                  <label for="message" class="block text-sm font-medium text-gray-700">Additional Comments</label>
+                  <textarea 
+                      id="message" 
+                      name="message" 
+                      rows="4" 
+                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                      placeholder="Add any comments or suggestions"></textarea>
+              </div>
+              <!-- Submit Button -->
+              <button 
+                  type="submit" 
+                  class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition transform hover:scale-105">
+                  Submit Survey
+              </button>
+          </form>
+      </div>
+  </div>
+</section>
+
+<!-- 
+Testimonials SECTION  -->
+<section id="testimonials" class="bg-indigo-100 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Heading -->
+      <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-indigo-600">What Our Users Are Saying</h2>
+          <p class="text-lg mt-4 text-gray-600">Here's what some of our users have to say about the app and the services they've used.</p>
+      </div>
+      <!-- Testimonials Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center">
+              <p class="text-lg italic text-gray-600 text-center">"This app made it so easy to find a reliable plumber. I was able to book an appointment in minutes, and the service was top-notch!"</p>
+              <div class="mt-4 text-right font-semibold text-indigo-600">- John Doe</div>
+          </div>
+          <!-- Testimonial 2 -->
+          <div class="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center">
+              <p class="text-lg italic text-gray-600 text-center">"I was able to find a trusted electrician in my area right away. The app is so user-friendly and efficient."</p>
+              <div class="mt-4 text-right font-semibold text-indigo-600">- Jane Smith</div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section id="faq" class="bg-gray-100 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-indigo-600">Frequently Asked Questions</h2>
+      <p class="text-lg mt-4 text-gray-600">Get answers to your most common questions.</p>
+    </div>
+
+    <div class="space-y-6">
+      <!-- FAQ Item 1 -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+        <button class="w-full text-left text-xl font-semibold text-indigo-600 flex justify-between items-center" id="faq1-btn">
+          What services do you provide?
+          <span id="faq1-icon" class="text-xl text-indigo-600">+</span>
+        </button>
+        <div class="mt-4 text-gray-600 hidden" id="faq1-content">
+          <p>We offer a variety of services, including electricians, plumbers, computer repair, and more. You can browse our directory to find the right professionals near you.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+        <button class="w-full text-left text-xl font-semibold text-indigo-600 flex justify-between items-center" id="faq2-btn">
+          How can I book a service provider?
+          <span id="faq2-icon" class="text-xl text-indigo-600">+</span>
+        </button>
+        <div class="mt-4 text-gray-600 hidden" id="faq2-content">
+          <p>Booking a service is simple! Select your provider, choose a time slot, and confirm your appointment. You will receive a confirmation email with the details.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+        <button class="w-full text-left text-xl font-semibold text-indigo-600 flex justify-between items-center" id="faq3-btn">
+          Can I leave a review for a service provider?
+          <span id="faq3-icon" class="text-xl text-indigo-600">+</span>
+        </button>
+        <div class="mt-4 text-gray-600 hidden" id="faq3-content">
+          <p>Yes, after your service is completed, you can leave feedback and rate the service provider to help other customers make informed decisions.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+        <button class="w-full text-left text-xl font-semibold text-indigo-600 flex justify-between items-center" id="faq4-btn">
+          How do I participate in your survey?
+          <span id="faq4-icon" class="text-xl text-indigo-600">+</span>
+        </button>
+        <div class="mt-4 text-gray-600 hidden" id="faq4-content">
+          <p>To help us improve, please fill out our quick survey after using a service. Your feedback will help us enhance our offerings and help others in the community.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- footer  -->
+<footer class="bg-indigo-600 text-white py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Top Section: Logo, About Us, Links -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12 text-gray-300 text-center sm:text-left">
+
+      <!-- Column 1: Logo and About Us -->
+      <div class="flex justify-center sm:justify-start items-center space-x-4">
+        <!-- Company Logo -->
+        <img src="./images/FIXIE4.png" alt="Community Connect Logo" class="w-48 h-auto sm:w-56 sm:h-auto md:w-64 md:h-auto rounded-full">
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div>
+        <h4 class="text-lg sm:text-xl md:text-2xl font-semibold">Quick Links</h4>
+        <ul class="space-y-2 mt-4">
+          <li><a href="#" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Home</a></li>
+          <li><a href="#" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Services</a></li>
+          <li><a href="#" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">FAQ</a></li>
+          <li><a href="#" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Support</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Contact -->
+      <div>
+        <h4 class="text-lg sm:text-xl md:text-2xl font-semibold">Contact</h4>
+        <ul class="space-y-2 mt-4">
+          <li><a href="tel:+123456789" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Call Us</a></li>
+          <li><a href="mailto:info@communityconnect.com" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Email Us</a></li>
+          <li><a href="#" class="hover:text-gray-200 text-sm sm:text-base md:text-lg">Our Location</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Social Media -->
+      <div>
+        <h4 class="text-lg sm:text-xl md:text-2xl font-semibold">Follow Us</h4>
+        <div class="flex justify-center sm:justify-start space-x-4 mt-4">
+          <a href="#" class="hover:text-gray-200 text-xl sm:text-2xl md:text-3xl">
+            <i class="fab fa-facebook-square"></i>
+          </a>
+          <a href="#" class="hover:text-gray-200 text-xl sm:text-2xl md:text-3xl">
+            <i class="fab fa-twitter-square"></i>
+          </a>
+          <a href="#" class="hover:text-gray-200 text-xl sm:text-2xl md:text-3xl">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="#" class="hover:text-gray-200 text-xl sm:text-2xl md:text-3xl">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider Line -->
+    <div class="border-t border-gray-400 my-8"></div>
+
+    <!-- Bottom Section: Copyright and Legal -->
+    <div class="text-center text-gray-300">
+      <p class="text-sm sm:text-base md:text-lg">&copy; 2024 Community Connect. All Rights Reserved. | <a href="#" class="hover:text-gray-200">Terms & Conditions</a> | <a href="#" class="hover:text-gray-200">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>
+
+
 
 
 

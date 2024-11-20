@@ -33,3 +33,21 @@ const menuIcon = document.getElementById('menu-icon');
             clearTimeout(hideTimeout);
             document.getElementById('login-dropdown').classList.remove('hidden');
         }
+
+
+          // FAQ Toggle functionality with icon change
+  const faqButtons = document.querySelectorAll('button[id^="faq"]');
+  faqButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const content = document.querySelector(`#${button.id.replace('btn', 'content')}`);
+      const icon = document.querySelector(`#${button.id.replace('btn', 'icon')}`);
+
+      content.classList.toggle('hidden');
+      const isHidden = content.classList.contains('hidden');
+      button.classList.toggle('font-semibold', isHidden);
+      button.classList.toggle('font-medium', !isHidden);
+
+      // Toggle icon (open/close)
+      icon.textContent = isHidden ? '+' : '−';
+    });
+  });

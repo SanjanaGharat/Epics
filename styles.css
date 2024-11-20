@@ -83,3 +83,11 @@
 .animate-spin {
     animation: spin 8s linear infinite;
 }
+
+
+@media (max-width: 971px) and (min-width: 767px) {
+    #how-it-works .grid {
+      grid-template-columns: 1fr; /* One card per row */
+    }
+  }
+  
