@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page with Animated Background</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Background shape animations */
+        @keyframes move {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(20px, -30px) rotate(45deg);
+            }
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Shape styles */
+        .bg-circle {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            animation: move 6s infinite ease-in-out alternate;
+        }
+        .bg-triangle {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 70px solid rgba(255, 255, 255, 0.2);
+            position: absolute;
+            animation: float 5s infinite ease-in-out alternate;
+        }
+        .bg-curly {
+            width: 100px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            clip-path: path('M 0 20 Q 25 0 50 20 T 100 20');
+            position: absolute;
+            animation: rotate 10s infinite linear;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center h-screen relative overflow-hidden">
+    <!-- Animated Shapes -->
+    <div class="bg-circle" style="top: 10%; left: 15%;"></div>
+    <div class="bg-circle" style="bottom: 20%; right: 25%;"></div>
+    <div class="bg-circle" style="top: 30%; left: 70%;"></div>
+    <div class="bg-circle" style="top: 80%; left: 50%;"></div>
+    <div class="bg-triangle" style="top: 20%; left: 40%;"></div>
+    <div class="bg-triangle" style="bottom: 25%; right: 15%;"></div>
+    <div class="bg-triangle" style="top: 60%; right: 30%;"></div>
+    <div class="bg-triangle" style="top: 50%; left: 5%;"></div>
+    <div class="bg-curly" style="top: 50%; left: 10%;"></div>
+    <div class="bg-curly" style="top: 80%; left: 25%;"></div>
+    <div class="bg-curly" style="bottom: 40%; right: 60%;"></div>
+
+    <div class="bg-circle" style="top: 10%; right: 10%; animation-delay: 2s;"></div>
+    <div class="bg-circle" style="top: 20%; right: 20%; animation-delay: 4s;"></div>
+    <div class="bg-triangle" style="top: 15%; right: 30%; animation-delay: 1s;"></div>
+    <div class="bg-triangle" style="top: 25%; right: 35%; animation-delay: 3s;"></div>
+    <div class="bg-curly" style="top: 5%; right: 25%; animation-delay: 6s;"></div>
+    <div class="bg-curly" style="top: 30%; right: 40%; animation-delay: 5s;"></div>
+
+    <!-- Login Form Container -->
+    <div class="ml-2 mr-2 max-w-4xl w-full bg-black/60 backdrop-blur-lg p-8 rounded-2xl shadow-lg text-white relative flex flex-col md:flex-row items-center justify-center md:h-[500px]">
+        <!-- Left Section -->
+        <div class="w-full md:w-1/2 flex flex-col items-center justify-center text-center space-y-4">
+            <!-- Logo and Text Centered -->
+            <div class="flex flex-col items-center">
+                <a href="/" class="transform transition-transform duration-1000 ease-in-out hover:rotate-[360deg]">
+                    <img src="../images/FIXIE4.png" alt="Company Logo" class="h-16 md:h-20 mb-2">
+                </a>
+                <h1 class="text-4xl md:text-5xl font-bold">Login</h1>
+                <p class="text-gray-300 pt-4 mb-4">Welcome to the Fixie</p>
+            </div>
+            
+        </div>
+
+        <!-- Form Section -->
+        <div class="w-full md:w-1/2 space-y-6">
+            <form action="#" method="POST" class="space-y-6">
+                <!-- Email Input -->
+                <div class="relative">
+                    <div class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-blue-400 rounded-full p-2 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-envelope-open"></i>
+                    </div>
+                    <input 
+                        type="email" 
+                        placeholder=" Email Address" 
+                        class="w-full bg-white/20 text-white pl-12 py-3 rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        required
+                    />
+                </div>
+
+                <!-- Password Input -->
+                <div class="relative">
+                    <div class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-blue-400 rounded-full p-2 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <input 
+                        type="password" 
+                        placeholder=" Password" 
+                        class="w-full bg-white/20 text-white pl-12 py-3 rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        required
+                    />
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                    class="w-full bg-gradient-to-r from-blue-400 to-cyan-200 font-semibold text-white py-3 rounded-full hover:shadow-lg hover:scale-105 transition-transform"
+                >
+                    Sign in
+                </button>
+            </form>
+
+            <!-- Footer Links -->
+            <div class="text-sm text-gray-300 space-y-2 border-t border-gray-500 pt-4">
+                <p>Don't have an account? <a href="./signin.html" class="text-blue-400 font-semibold hover:underline">Sign up</a></p>
+                <p>Forgot your password? <a href="#" class="text-blue-400 font-semibold hover:underline">Reset password</a></p>
+                <p>Don't have a password yet? <a href="#" class="text-blue-400 font-semibold hover:underline">Set password</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
