@@ -1,14 +1,23 @@
 import os
 from fastapi import FastAPI, HTTPException, Depends, Body
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict
 
+from backend.models.services import ServiceProvider
 from backend.models.users import User, UserLogin, Admin
 from backend.auth.auth_handler import decodeJWT, signJWT
 from backend.auth.auth_bearer import UserBearerAuth, AdminBearerAuth
-from backend.db.database import add_user, check_admin_auth, check_auth, add_admin
+from backend.db.database import add_user, check_admin_auth, check_auth, add_admin, add_service_provider, get_services
 
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 ADMIN_SECRET = os.getenv("ADMIN_SECRET") or "02supersecret144"
 
 @app.get("/")
@@ -60,3 +69,14 @@ async def super_secure_endpoint(token: str = Depends(AdminBearerAuth()))->Dict:
     decoded_token = decodeJWT(token)
     # do stuff with the token
     return {"message": "booo mega!"}
+
+@app.post("/services/add")
+async def add_service(service_provider: ServiceProvider = Body(...))->Dict:
+    service_provider = service_provider
+    result = await add_service_provider(service_provider)
+    result.pop("_id")
+    return result
+
+@app.get("/services")
+async def get_services_list()->Dict:
+    return await get_services()

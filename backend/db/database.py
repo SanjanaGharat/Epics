@@ -3,6 +3,7 @@ import motor.motor_asyncio
 from bson.objectid import ObjectId
 import bcrypt
 from backend.models.users import User, UserLogin, Admin
+from backend.models.services import ServiceProvider
 
 MONGO_URL = "mongodb://localhost:27017"
 
@@ -10,6 +11,7 @@ client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
 db = client.fixie
 users = db.get_collection("users")
 admin_users = db.get_collection("admin_users")
+services = db.get_collection("services")
 
 def hash_password(password: str)->str:
     salt = bcrypt.gensalt()
@@ -51,3 +53,21 @@ async def check_admin_auth(admin: Admin)->Dict:
     if admin_in_db and verify_password(admin["password"], admin_in_db["password"]):
         return admin_in_db
     return {}
+
+async def add_service_provider(service_provider: ServiceProvider)->Dict:
+    service_provider = service_provider.model_dump()
+    result = await services.insert_one(service_provider)
+    service_provider_in_db = await find_service_provider(result.inserted_id)
+    return service_provider_in_db
+
+async def find_service_provider(id: str)->Dict:
+    service_provider = await services.find_one({"_id": ObjectId(id)})
+    return service_provider
+
+async def get_services()->Dict:
+    service_providers = []
+    async for service_provider in services.find():
+        service_provider.pop("_id")
+        service_providers.append(service_provider)
+    
+    return {"services": service_providers}
