@@ -166,4 +166,4 @@ const menuIcon = document.getElementById('menu-icon');
     }
 
     // Generate the service cards when the page loads
-    window.onload = generateServiceCards;
+    // window.onload = generateServiceCards;

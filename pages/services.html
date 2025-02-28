@@ -276,6 +276,8 @@
         width: 280px; /* Fixed width */
         height: 350px; /* Fixed height */
         margin: auto;
+        align-items: center;
+        margin-bottom: 30px;
     }
 
     .provider-card:hover {
@@ -284,9 +286,12 @@
     }
 
     .provider-image {
-        width: 100%;
+        width: 50%;
         height: 180px; /* Fixed image height */
-        object-fit: cover;
+        object-fit: contain;
+
+        /* convert black png to purple */
+        filter: invert(13%) sepia(99%) saturate(4383%) hue-rotate(266deg) brightness(100%) contrast(50%);
     }
 
     .provider-info {
@@ -417,100 +422,132 @@ services section -->
 
 <section id="service-provider-list">
     <!-- Cards will be dynamically generated here -->
+     <div class="loader"></div>
+     <style>
+        #service-provider-list {
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+.loader {
+  width: 80px;
+  height: 40px;
+  display: flex;
+  scale: 2;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  margin:0 -2px 0 0;
+  flex: 1;
+  --c:no-repeat linear-gradient(#4f46e5 0 0);
+  background: var(--c), var(--c), var(--c), var(--c);
+  animation: l13-1 1s infinite linear, l13-2 1s infinite linear;
+}
+.loader:after {
+  transform: scale(-1);
+  margin: 0 0 0 -2px;
+}
+@keyframes l13-1 {
+  0%,
+  3%   {background-size: 0   4px,4px 0  ,0   4px,4px 0  }
+  12.5%{background-size: 50% 4px,4px 0  ,0   4px,4px 0  }
+  25%  {background-size: 50% 4px,4px 50%,0   4px,4px 0  }
+  37.5%{background-size: 50% 4px,4px 50%,50% 4px,4px 0  }
+  46%,
+  54%  {background-size: 50% 4px,4px 50%,50% 4px,4px 50%}
+  62.5%{background-size: 0   4px,4px 50%,50% 4px,4px 50%}
+  75%  {background-size: 0   4px,4px 0  ,50% 4px,4px 50%}
+  87.5%{background-size: 0   4px,4px 0  ,0   4px,4px 50%}
+  96%,
+  100% {background-size: 0   4px,4px 0  ,0   4px,4px 0  }
+}
+@keyframes l13-2 {
+  0%,49.9%{background-position:0              20px,50% 20px,20px 100%,100% 100%}
+  50%,100%{background-position:right 20px top 20px,50% 100%,100% 100%,100% 20px}
+}
+/* smaller width for mobiles */
+@media (max-width: 768px) {
+  .loader {
+    scale: 1.25;
+  }
+}
+     </style>
 </section>
 
 <script>
-   // Service provider data with 'service' field
-   const serviceProviders = [
-{ name: 'John Doe', category: 'residential', service: 'electrician', image: 'https://via.placeholder.com/300', rating: 4.5, cost: 'medium', description: 'Expert in home electrical repairs and installations.' },
-{ name: 'Jane Smith', category: 'commercial', service: 'plumber', image: 'https://via.placeholder.com/300', rating: 4.8, cost: 'high', description: 'Specialist in office and commercial space plumbing.' },
-{ name: 'Mike Johnson', category: 'industrial', service: 'computer-repair', image: 'https://via.placeholder.com/300', rating: 4.2, cost: 'low', description: 'Experienced in large-scale industrial computer repairs.' },
-{ name: 'Sarah Lee', category: 'residential', service: 'cleaning-services', image: 'https://via.placeholder.com/300', rating: 5.0, cost: 'medium', description: 'Trusted by hundreds for her quick and efficient cleaning services.' },
-{ name: 'Tom Harris', category: 'residential', service: 'electrician', image: 'https://via.placeholder.com/300', rating: 4.7, cost: 'high', description: 'Skilled in home automation and electrical system upgrades.' },
-{ name: 'Linda Green', category: 'commercial', service: 'plumber', image: 'https://via.placeholder.com/300', rating: 4.9, cost: 'high', description: 'Commercial plumbing contractor with extensive experience in office buildings.' },
-{ name: 'Alex Williams', category: 'industrial', service: 'computer-repair', image: 'https://via.placeholder.com/300', rating: 4.6, cost: 'low', description: 'Expert in industrial computer repairs for large machinery.' },
-{ name: 'Jessica Brown', category: 'residential', service: 'cleaning-services', image: 'https://via.placeholder.com/300', rating: 4.3, cost: 'medium', description: 'Professional cleaner specializing in home cleanups and repairs.' },
-{ name: 'Paul Davis', category: 'residential', service: 'gardening', image: 'https://via.placeholder.com/300', rating: 4.8, cost: 'medium', description: 'Expert in garden maintenance and landscaping.' },
-{ name: 'Emily Clark', category: 'commercial', service: 'pest-control', image: 'https://via.placeholder.com/300', rating: 4.5, cost: 'medium', description: 'Specialist in eco-friendly pest control solutions for offices.' },
-{ name: 'Mark Lewis', category: 'industrial', service: 'welding', image: 'https://via.placeholder.com/300', rating: 4.9, cost: 'high', description: 'Industrial-grade welding expert for heavy machinery.' },
-{ name: 'Anna Scott', category: 'residential', service: 'painting', image: 'https://via.placeholder.com/300', rating: 4.7, cost: 'medium', description: 'Professional painter for homes and interiors.' },
-{ name: 'Daniel Walker', category: 'commercial', service: 'HVAC-repair', image: 'https://via.placeholder.com/300', rating: 4.6, cost: 'high', description: 'Experienced HVAC technician for commercial buildings.' },
-{ name: 'Sophia Turner', category: 'residential', service: 'carpentry', image: 'https://via.placeholder.com/300', rating: 4.4, cost: 'medium', description: 'Skilled carpenter for home furniture and repairs.' },
-{ name: 'James Wright', category: 'industrial', service: 'machinery-repair', image: 'https://via.placeholder.com/300', rating: 4.3, cost: 'high', description: 'Expert in repairing industrial-grade machinery.' },
-{ name: 'Laura Adams', category: 'residential', service: 'babysitting', image: 'https://via.placeholder.com/300', rating: 4.9, cost: 'medium', description: 'Trusted babysitter with years of experience.' },
-{ name: 'Ethan Phillips', category: 'commercial', service: 'security-systems', image: 'https://via.placeholder.com/300', rating: 5.0, cost: 'high', description: 'Expert in installing and maintaining security systems for offices.' },
-{ name: 'Chloe Edwards', category: 'residential', service: 'pet-grooming', image: 'https://via.placeholder.com/300', rating: 4.8, cost: 'medium', description: 'Specialized in grooming pets with care and attention.' },
-{ name: 'Nathan Martin', category: 'commercial', service: 'window-cleaning', image: 'https://via.placeholder.com/300', rating: 4.7, cost: 'low', description: 'Efficient window cleaner for office buildings.' },
-{ name: 'Victoria Hill', category: 'industrial', service: 'logistics', image: 'https://via.placeholder.com/300', rating: 4.5, cost: 'high', description: 'Expert in industrial logistics and transportation.' },
-{ name: 'Chris Carter', category: 'residential', service: 'plumber', image: 'https://via.placeholder.com/300', rating: 4.6, cost: 'low', description: 'Reliable plumber for all home plumbing needs.' },
-{ name: 'Lucy Moore', category: 'residential', service: 'elderly-care', image: 'https://via.placeholder.com/300', rating: 5.0, cost: 'medium', description: 'Compassionate caregiver for the elderly.' },
-{ name: 'Ryan Nelson', category: 'industrial', service: 'electrician', image: 'https://via.placeholder.com/300', rating: 4.3, cost: 'medium', description: 'Experienced in electrical systems for factories.' },
-];
+   const serviceProviders = fetch('https://kanishak-fixie.hf.space/services')
+    .then(response => response.json())
+    .then((data) => {
+        const serviceProviders = data['services'];
+        // Elements
+        const serviceProviderList = document.getElementById('service-provider-list');
+        const searchBar = document.getElementById('search-bar');
+        const filterCategory = document.getElementById('filter-category');
+        const filterRating = document.getElementById('filter-rating');
+        const filterCost = document.getElementById('filter-cost');
+        const filterService = document.getElementById('filter-service');
+        console.log(data);
+        // Render cards
+        function renderCards(filters = {}) {
+        serviceProviderList.innerHTML = ''; // Clear existing cards
 
+        serviceProviders
+            .filter(provider => {
+                const matchesCategory = filters.category === 'all' || provider.category === filters.category;
+                const matchesService = filters.service === 'all' || provider.service === filters.service;
+                const matchesSearch = filters.search === '' || provider.name.toLowerCase().includes(filters.search.toLowerCase()) || provider.description.toLowerCase().includes(filters.search.toLowerCase());
+                const matchesRating = filters.rating === 'all' || provider.rating >= parseFloat(filters.rating);
+                const matchesCost = filters.cost === 'all' || provider.cost === filters.cost;
+                return matchesCategory && matchesService && matchesSearch && matchesRating && matchesCost;
+            })
+            .forEach(provider => {
+                const a = document.createElement('a');
+                const card = document.createElement('div');
+                card.className = 'provider-card';
+                card.innerHTML = `
+                    <img src="${provider.image}" alt="${provider.name}" class="provider-image">
+                    <div class="provider-info">
+                        <h3>${provider.name}</h3>
+                        <p>${provider.description}</p>
+                        <p class="rating">Rating: ${provider.rating != 0 ? `${provider.rating} <i class="fas fa-star"></i>` : "No reviews yet."} </p>
+                    </div>
+                `;
+                a.href = "serviceprovider.html?id=" + provider._id;
+                a.appendChild(card);
+                serviceProviderList.appendChild(a);
+            });
+        }
 
-// Elements
-const serviceProviderList = document.getElementById('service-provider-list');
-const searchBar = document.getElementById('search-bar');
-const filterCategory = document.getElementById('filter-category');
-const filterRating = document.getElementById('filter-rating');
-const filterCost = document.getElementById('filter-cost');
-const filterService = document.getElementById('filter-service');
+        // Event listeners
+        function applyFilters() {
+        const filters = {
+            search: searchBar.value,
+            category: filterCategory.value,
+            rating: filterRating.value,
+            cost: filterCost.value,
+            service: filterService.value,
+        };
+        renderCards(filters);
+        }
 
-// Render cards
-function renderCards(filters = {}) {
-serviceProviderList.innerHTML = ''; // Clear existing cards
+        searchBar.addEventListener('input', applyFilters);
+        filterCategory.addEventListener('change', applyFilters);
+        filterRating.addEventListener('change', applyFilters);
+        filterCost.addEventListener('change', applyFilters);
+        filterService.addEventListener('change', applyFilters);
 
-serviceProviders
-    .filter(provider => {
-        const matchesCategory = filters.category === 'all' || provider.category === filters.category;
-        const matchesService = filters.service === 'all' || provider.service === filters.service;
-        const matchesSearch = filters.search === '' || provider.name.toLowerCase().includes(filters.search.toLowerCase()) || provider.description.toLowerCase().includes(filters.search.toLowerCase());
-        const matchesRating = filters.rating === 'all' || provider.rating >= parseFloat(filters.rating);
-        const matchesCost = filters.cost === 'all' || provider.cost === filters.cost;
-        return matchesCategory && matchesService && matchesSearch && matchesRating && matchesCost;
-    })
-    .forEach(provider => {
-        const card = document.createElement('div');
-        card.className = 'provider-card';
-        card.innerHTML = `
-            <img src="${provider.image}" alt="${provider.name}" class="provider-image">
-            <div class="provider-info">
-                <h3>${provider.name}</h3>
-                <p>${provider.description}</p>
-                <p class="rating">Rating: ${provider.rating} <i class="fas fa-star"></i></p>
-            </div>
-        `;
-        serviceProviderList.appendChild(card);
-    });
-}
-
-// Event listeners
-function applyFilters() {
-const filters = {
-    search: searchBar.value,
-    category: filterCategory.value,
-    rating: filterRating.value,
-    cost: filterCost.value,
-    service: filterService.value,
-};
-renderCards(filters);
-}
-
-searchBar.addEventListener('input', applyFilters);
-filterCategory.addEventListener('change', applyFilters);
-filterRating.addEventListener('change', applyFilters);
-filterCost.addEventListener('change', applyFilters);
-filterService.addEventListener('change', applyFilters);
-
-// Initial render
-renderCards({
-search: '',
-category: 'all',
-rating: 'all',
-cost: 'all',
-service: 'all',
-});
-
+        // Initial render
+        renderCards({
+        search: '',
+        category: 'all',
+        rating: 'all',
+        cost: 'all',
+        service: 'all',
+        });
+        })
+    .catch(error => console.error('Error fetching data:', error));
 </script>
 
 
@@ -584,7 +621,7 @@ service: 'all',
 
     /* Icon Styling */
     .fa {
-        font-size: 3rem;#
+        font-size: 3rem;
         transition: transform 0.3s ease;
     }
 
@@ -639,49 +676,88 @@ service: 'all',
       </div>
       <!-- Survey Form -->
       <div class="flex justify-center">
-          <form class="bg-white p-10 rounded-lg shadow-xl w-full sm:w-2/3 md:w-1/2">
-              <!-- Name Field -->
-              <div class="mb-6">
-                  <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
-                  <input 
-                      type="text" 
-                      id="name" 
-                      name="name" 
-                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
-                      placeholder="Enter your name">
-              </div>
-              <!-- Service Field -->
-              <div class="mb-6">
-                  <label for="service" class="block text-sm font-medium text-gray-700">Select a Service</label>
-                  <select 
-                      id="service" 
-                      name="service" 
-                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500">
-                      <option value="" disabled selected>Select an option</option>
-                      <option value="electrician">Electrician</option>
-                      <option value="plumber">Plumber</option>
-                      <option value="computer-repair">Computer Repair</option>
-                      <option value="carpenter">Carpenter</option>
-                      <option value="painter">Painter</option>
-                  </select>
-              </div>
-              <!-- Message Field -->
-              <div class="mb-6">
-                  <label for="message" class="block text-sm font-medium text-gray-700">Additional Comments</label>
-                  <textarea 
-                      id="message" 
-                      name="message" 
-                      rows="4" 
-                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
-                      placeholder="Add any comments or suggestions"></textarea>
-              </div>
-              <!-- Submit Button -->
-              <button 
-                  type="submit" 
-                  class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition transform hover:scale-105">
-                  Submit Survey
-              </button>
-          </form>
+        <form id="surveyForm" onsubmit="submitSurvey(event)" class="bg-white p-10 rounded-lg shadow-xl w-full sm:w-2/3 md:w-1/2">
+            <!-- Name Field -->
+            <div class="mb-6">
+                <label for="name" class="block text-sm font-medium text-gray-700">Full Name or Shop Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                    placeholder="Enter your name">
+            </div>
+            <!-- Number Field -->
+            <div class="mb-6">
+                <label for="number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input 
+                    type="tel" 
+                    id="number" 
+                    name="number" 
+                    class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                    placeholder="Enter your phone number">
+            </div>
+            <!--Adress Field-->
+            <div class="mb-6">
+                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <input 
+                    type="text" 
+                    id="address" 
+                    name="address" 
+                    class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                    placeholder="Enter your address">
+            </div>
+            <!-- Service Field -->
+            <div class="mb-6">
+                <label for="service" class="block text-sm font-medium text-gray-700">Select a Service</label>
+                <select 
+                    id="service" 
+                    name="service" 
+                    class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="electrician">Electrician</option>
+                    <option value="plumber">Plumber</option>
+                    <option value="computer-repair">Computer Repair</option>
+                    <option value="laptop-repair">Laptop Repair</option>
+                    <option value="phone-repair">Phone Repair</option>
+                    <option value="ac-repair">AC Repair</option>
+                    <option value="carpenter">Carpenter</option>
+                    <option value="painter">Painter</option>
+                    <option value="barber">Barber</option>
+                    <option value="hvac-repair">HVAC Repair</option>
+                    <option value="babysitting">Babysitting</option>
+                    <option value="carpentry">Carpentry</option>
+                    <option value="cleaning-services">Cleaning Services</option>
+                    <option value="elderly-care">Elderly Care</option>
+                    <option value="gardening">Gardening</option>
+                    <option value="logistics">Logistics</option>
+                    <option value="machinery-repair">Machinery Repair</option>
+                    <option value="painting">Painting</option>
+                    <option value="pest-control">Pest Control</option>
+                    <option value="pet-grooming">Pet Grooming</option>
+                    <option value="security-systems">Security Systems</option>
+                    <option value="welding">Welding</option>
+                    <option value="window-cleaning">Window Cleaning</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <!-- Message Field -->
+            <div class="mb-6">
+                <label for="message" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea 
+                    id="description" 
+                    name="description" 
+                    rows="4" 
+                    class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                    placeholder="Add any comments or suggestions"></textarea>
+            </div>
+            <!-- Submit Button -->
+            <button 
+                type="submit" 
+                class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition transform hover:scale-105">
+                Submit Survey
+            </button>
+        </form>
       </div>
   </div>
 </section>
@@ -809,6 +885,42 @@ service: 'all',
 </footer>
 
 
+<script>
+    // for sending the form data to the server
+    async function submitSurvey(event) {
+        event.preventDefault();
+        const form = document.getElementById('surveyForm');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        console.log(data);
+        const body = {
+            name: data.name,
+            category: "",
+            service: data.service,
+            rating: 0.0,
+            image: "",
+            cost: "",
+            description: data.description,
+            phone: data.number,
+            address: data.address
+        };
+        console.log(body);
+        const response = await fetch('https://kanishak-fixie.hf.space/services/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+        if (response.ok) {
+            alert('Survey submitted successfully!');
+            form.reset();
+        } else {
+            alert('Failed to submit survey. Please try again.');
+        }
+
+      }
+     </script>
 
 
 
