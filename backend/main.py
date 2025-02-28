@@ -3,11 +3,20 @@ from fastapi import FastAPI, HTTPException, Depends, Body
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict
 
-from backend.models.services import ServiceProvider
+from backend.models.services import Appointments, ServiceProvider
 from backend.models.users import User, UserLogin, Admin
 from backend.auth.auth_handler import decodeJWT, signJWT
 from backend.auth.auth_bearer import UserBearerAuth, AdminBearerAuth
-from backend.db.database import add_user, check_admin_auth, check_auth, add_admin, add_service_provider, get_services
+from backend.db.database import (
+    add_user, 
+    check_admin_auth, 
+    check_auth, 
+    add_admin, 
+    add_service_provider, 
+    get_services, 
+    find_service_provider, 
+    create_appointment
+)
 
 
 app = FastAPI()
@@ -73,10 +82,43 @@ async def super_secure_endpoint(token: str = Depends(AdminBearerAuth()))->Dict:
 @app.post("/services/add")
 async def add_service(service_provider: ServiceProvider = Body(...))->Dict:
     service_provider = service_provider
+    image,cat = get_service_image_category(service_provider.service)
+    service_provider.category = cat
+    service_provider.image = image
     result = await add_service_provider(service_provider)
-    result.pop("_id")
+    # result.pop("_id")
     return result
 
+def get_service_image_category(service:str):
+    services = {
+        "electrician": ("https://cdn-icons-png.flaticon.com/512/3467/3467234.png","Residential"),
+        "ac repair": ("https://cdn-icons-png.flaticon.com/512/919/919081.png", "Residential"),
+        "plumber": ("https://cdn-icons-png.flaticon.com/512/3998/3998390.png", "Residential"),
+        "mobile repair" : ("https://cdn-icons-png.flaticon.com/512/12349/12349886.png", "Commercial"),
+        "barber" : ("https://cdn-icons-png.flaticon.com/512/9054/9054739.png", "Residential"),
+        "appliance repair": ("https://cdn-icons-png.flaticon.com/512/11311/11311315.png","Commercial"),
+        "laptop repair": ("https://cdn-icons-png.flaticon.com/512/6265/6265665.png", "Commercial"),
+        "carpenter": ("https://cdn-icons-png.flaticon.com/512/3998/3998402.png","Industrial"),
+        "painter": ("https://cdn-icons-png.flaticon.com/512/838/838118.png", "Industrial"),
+        "other": ("https://cdn-icons-png.flaticon.com/512/953/953789.png", "Commercial")
+    }
+    service = service.lower().strip().replace('-', ' ')
+    if service in services:
+        return services[service]
+    if " ac " in service:
+        return services["ac repair"]
+    if "electric" in service:
+        return services["electrician"]
+    return services["other"]
+    
 @app.get("/services")
 async def get_services_list()->Dict:
     return await get_services()
+
+@app.get("/service")
+async def get_service(id:str):
+    return await find_service_provider(id)
+
+@app.post("/appointments/create")
+async def create_new_appointment(appointment: Appointments = Body(...)):
+    return await create_appointment(appointment)

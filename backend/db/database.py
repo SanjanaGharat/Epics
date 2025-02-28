@@ -1,17 +1,24 @@
+import os
+from datetime import datetime
 from typing import Dict
+from fastapi import HTTPException
 import motor.motor_asyncio
 from bson.objectid import ObjectId
 import bcrypt
 from backend.models.users import User, UserLogin, Admin
-from backend.models.services import ServiceProvider
+from backend.models.services import ServiceProvider, Appointments
 
-MONGO_URL = "mongodb://localhost:27017"
+MONGO_USER = os.environ.get("MONGO_USER")
+MONGO_PASSWORD = os.environ.get("MONGO_PASS")
+# MONGO_URL = "mongodb://localhost:27017"
+MONGO_URL = f"mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@cluster0.rmqx2.mongodb.net/"
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URL)
 db = client.fixie
 users = db.get_collection("users")
 admin_users = db.get_collection("admin_users")
 services = db.get_collection("services")
+appoointments = db.get_collection("appointments")
 
 def hash_password(password: str)->str:
     salt = bcrypt.gensalt()
@@ -62,12 +69,33 @@ async def add_service_provider(service_provider: ServiceProvider)->Dict:
 
 async def find_service_provider(id: str)->Dict:
     service_provider = await services.find_one({"_id": ObjectId(id)})
+    service_provider.pop("_id")
     return service_provider
 
 async def get_services()->Dict:
     service_providers = []
     async for service_provider in services.find():
-        service_provider.pop("_id")
+        service_provider["_id"] = str(service_provider["_id"])
         service_providers.append(service_provider)
     
     return {"services": service_providers}
+
+async def add_rating(id: str, rating: float)->Dict:
+    service_provider = await find_service_provider(id)
+    service_provider["rating"] = rating
+    await services.update_one({"_id": ObjectId(id)}, {"$set": service_provider})
+    return service_provider
+
+async def find_appointment(id: str)->Dict:
+    appointment = await appoointments.find_one({"_id": ObjectId(id)})
+    appointment["_id"] = str(appointment["_id"])
+    return appointment
+
+async def create_appointment(appointment: Appointments)->Dict:
+    appointment = appointment.model_dump()
+    dt = datetime.strptime(appointment['datetime'], "%Y-%m-%dT%H:%M")
+    if dt < datetime.now():
+        return HTTPException(status_code=400, detail="Please enter a valid date in the future.")
+    result = await appoointments.insert_one(appointment)
+    appointment_in_db = await find_appointment(result.inserted_id)
+    return appointment_in_db

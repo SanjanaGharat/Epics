@@ -171,16 +171,36 @@
       </div>
       <!-- Survey Form -->
       <div class="flex justify-center">
-          <form class="bg-white p-10 rounded-lg shadow-xl w-full sm:w-2/3 md:w-1/2">
+          <form id="surveyForm" onsubmit="submitSurvey(event)" class="bg-white p-10 rounded-lg shadow-xl w-full sm:w-2/3 md:w-1/2">
               <!-- Name Field -->
               <div class="mb-6">
-                  <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+                  <label for="name" class="block text-sm font-medium text-gray-700">Full Name or Shop Name</label>
                   <input 
                       type="text" 
                       id="name" 
                       name="name" 
                       class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
                       placeholder="Enter your name">
+              </div>
+              <!-- Number Field -->
+              <div class="mb-6">
+                  <label for="number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                  <input 
+                      type="tel" 
+                      id="number" 
+                      name="number" 
+                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                      placeholder="Enter your phone number">
+              </div>
+              <!--Adress Field-->
+              <div class="mb-6">
+                  <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                  <input 
+                      type="text" 
+                      id="address" 
+                      name="address" 
+                      class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
+                      placeholder="Enter your address">
               </div>
               <!-- Service Field -->
               <div class="mb-6">
@@ -193,22 +213,23 @@
                       <option value="electrician">Electrician</option>
                       <option value="plumber">Plumber</option>
                       <option value="computer-repair">Computer Repair</option>
+                      <option value="laptop-repair">Laptop Repair</option>
+                      <option value="phone-repair">Phone Repair</option>
+                      <option value="ac-repair">AC Repair</option>
                       <option value="carpenter">Carpenter</option>
                       <option value="painter">Painter</option>
+                      <option value="barber">Barber</option>
                       <option value="hvac-repair">HVAC Repair</option>
                       <option value="babysitting">Babysitting</option>
                       <option value="carpentry">Carpentry</option>
                       <option value="cleaning-services">Cleaning Services</option>
-                      <option value="computer-repair">Computer Repair</option>
                       <option value="elderly-care">Elderly Care</option>
-                      <option value="electrician">Electrician</option>
                       <option value="gardening">Gardening</option>
                       <option value="logistics">Logistics</option>
                       <option value="machinery-repair">Machinery Repair</option>
                       <option value="painting">Painting</option>
                       <option value="pest-control">Pest Control</option>
                       <option value="pet-grooming">Pet Grooming</option>
-                      <option value="plumber">Plumber</option>
                       <option value="security-systems">Security Systems</option>
                       <option value="welding">Welding</option>
                       <option value="window-cleaning">Window Cleaning</option>
@@ -217,10 +238,10 @@
               </div>
               <!-- Message Field -->
               <div class="mb-6">
-                  <label for="message" class="block text-sm font-medium text-gray-700">Additional Comments</label>
+                  <label for="message" class="block text-sm font-medium text-gray-700">Description</label>
                   <textarea 
-                      id="message" 
-                      name="message" 
+                      id="description" 
+                      name="description" 
                       rows="4" 
                       class="mt-2 block w-full border border-gray-300 rounded-lg shadow-sm py-3 px-4 focus:ring-indigo-500 focus:border-indigo-500" 
                       placeholder="Add any comments or suggestions"></textarea>
@@ -385,6 +406,42 @@ Testimonials SECTION  -->
 
 
 
+<script>
+  // for sending the form data to the server
+  async function submitSurvey(event) {
+      event.preventDefault();
+      const form = document.getElementById('surveyForm');
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      console.log(data);
+      const body = {
+          name: data.name,
+          category: "",
+          service: data.service,
+          rating: 0.0,
+          image: "",
+          cost: "",
+          description: data.description,
+          phone: data.number,
+          address: data.address
+      };
+      console.log(body);
+      const response = await fetch('http://localhost:8000/services/add', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+      });
+      if (response.ok) {
+          alert('Survey submitted successfully!');
+          form.reset();
+      } else {
+          alert('Failed to submit survey. Please try again.');
+      }
+
+    }
+   </script>
 
      <script src="script.js"></script>
 </body>
