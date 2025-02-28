@@ -477,7 +477,7 @@ services section -->
 </section>
 
 <script>
-   const serviceProviders = fetch('http://127.0.0.1:8000/services')
+   const serviceProviders = fetch('https://kanishak-fixie.hf.space/services')
     .then(response => response.json())
     .then((data) => {
         const serviceProviders = data['services'];
@@ -905,7 +905,7 @@ services section -->
             address: data.address
         };
         console.log(body);
-        const response = await fetch('http://localhost:8000/services/add', {
+        const response = await fetch('https://kanishak-fixie.hf.space/services/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

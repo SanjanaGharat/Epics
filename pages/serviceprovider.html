@@ -123,7 +123,7 @@
             return String(val).charAt(0).toUpperCase() + String(val).slice(1);
         }
         const id = new URLSearchParams(window.location.search).get("id");
-        const serviceProvier = fetch(`http://localhost:8000/service?id=${id}`)
+        const serviceProvier = fetch(`https://kanishak-fixie.hf.space/service?id=${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -194,7 +194,7 @@
                     status: "pending"
                 });
                 console.log(body);
-            const appointment = await fetch("http://localhost:8000/appointments/create", {
+            const appointment = await fetch("https://kanishak-fixie.hf.space/appointments/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
